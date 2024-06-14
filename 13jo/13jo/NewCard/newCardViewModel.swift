@@ -34,3 +34,11 @@ extension TextField {
                                                            maxLength: maxLength))
     }
 }
+
+
+extension Color {
+    init(r: CGFloat, g: CGFloat, b: CGFloat) {
+        self.init(red: r/255, green: g/255, blue: b/255)
+    }
+}
+

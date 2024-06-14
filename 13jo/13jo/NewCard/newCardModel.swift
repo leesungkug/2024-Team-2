@@ -10,7 +10,8 @@ import SwiftData
 
 @available(iOS 17, *)
 @Model
-class newCard {
+class newCard: Identifiable {
+    var id: UUID = UUID()
     var question: String
     var answer: String
     
@@ -19,3 +20,5 @@ class newCard {
         self.answer = answer
     }
 }
+
+
