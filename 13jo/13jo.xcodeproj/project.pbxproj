@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1A66D9912C1CB11200174AD4 /* newCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66D9902C1CB11200174AD4 /* newCardView.swift */; };
 		1A66D9932C1CB12200174AD4 /* newCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66D9922C1CB12200174AD4 /* newCardModel.swift */; };
-		1A66D9952C1CB1C500174AD4 /* newCardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66D9942C1CB1C500174AD4 /* newCardApp.swift */; };
 		1A66D9972C1CB53C00174AD4 /* newCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A66D9962C1CB53C00174AD4 /* newCardViewModel.swift */; };
 		1EF68CC92C1C893A00DC2823 /* _3joApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF68CC82C1C893A00DC2823 /* _3joApp.swift */; };
 		1EF68CCB2C1C893A00DC2823 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF68CCA2C1C893A00DC2823 /* ContentView.swift */; };
@@ -28,7 +27,6 @@
 /* Begin PBXFileReference section */
 		1A66D9902C1CB11200174AD4 /* newCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newCardView.swift; sourceTree = "<group>"; };
 		1A66D9922C1CB12200174AD4 /* newCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newCardModel.swift; sourceTree = "<group>"; };
-		1A66D9942C1CB1C500174AD4 /* newCardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newCardApp.swift; sourceTree = "<group>"; };
 		1A66D9962C1CB53C00174AD4 /* newCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newCardViewModel.swift; sourceTree = "<group>"; };
 		1EF68CC52C1C893A00DC2823 /* 13jo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 13jo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EF68CC82C1C893A00DC2823 /* _3joApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _3joApp.swift; sourceTree = "<group>"; };
@@ -121,7 +119,6 @@
 				1EF68CE62C1CABA200DC2823 /* 3.xib */,
 				1A66D9902C1CB11200174AD4 /* newCardView.swift */,
 				1A66D9962C1CB53C00174AD4 /* newCardViewModel.swift */,
-				1A66D9942C1CB1C500174AD4 /* newCardApp.swift */,
 				1A66D9922C1CB12200174AD4 /* newCardModel.swift */,
 			);
 			path = NewCard;
@@ -216,7 +213,6 @@
 				E7774F672C1CB1BB008CC440 /* TestCardView.swift in Sources */,
 				1EF68CED2C1CB15F00DC2823 /* CardDetailView.swift in Sources */,
 				1A66D9932C1CB12200174AD4 /* newCardModel.swift in Sources */,
-				1A66D9952C1CB1C500174AD4 /* newCardApp.swift in Sources */,
 				1A66D9912C1CB11200174AD4 /* newCardView.swift in Sources */,
 				1A66D9972C1CB53C00174AD4 /* newCardViewModel.swift in Sources */,
 			);
