@@ -11,7 +11,7 @@ import SwiftUI
 struct _3joApp: App {
     var body: some Scene {
         WindowGroup {
-            CardDetail()
+            CardDetailView()
         }
     }
 }
