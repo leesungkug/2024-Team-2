@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TestCardView: View {
+    var shuffledCardList: [newCard] = []
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 13)
@@ -24,9 +25,10 @@ struct TestCardView: View {
                 .padding(.top, 90)
                 Spacer()
                 
-                Button(action: {
-                    
-                }, label: {
+                NavigationLink {
+                    //TODO: shuffledCardList 넣어서 CardDetail연결
+                    CardDetail()
+                } label: {
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color(hex: "53E7FB"))
                         .frame(width: 282, height: 64)
@@ -36,11 +38,11 @@ struct TestCardView: View {
                                 .foregroundStyle(.black)
                                 .fontWeight(.semibold)
                         }
-                })
+                }
                 
-                Button(action: {
-                    
-                }, label: {
+                NavigationLink {
+                    newCardView()
+                } label: {
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color(hex: "000000"))
                         .frame(width: 282, height: 47)
@@ -54,13 +56,13 @@ struct TestCardView: View {
                             }
                             
                         }
-                })
+                }
                 .padding(.top, 12)
                 .padding(.bottom, 36)
             }
         }
         .frame(width: 315, height: 425)
-
+        
     }
 }
 

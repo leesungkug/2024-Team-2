@@ -30,9 +30,9 @@ struct EmptyTestCardView: View {
                     .padding(.top, 27)
                     .padding(.bottom, 40)
                 
-                Button(action: {
-                    
-                }, label: {
+                NavigationLink {
+                    newCardView()
+                } label: {
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color(hex: "53E7FB"))
                         .frame(width: 282, height: 64)
@@ -42,7 +42,7 @@ struct EmptyTestCardView: View {
                                 .foregroundStyle(.black)
                                 .fontWeight(.semibold)
                         }
-                })
+                }
                 .padding(.bottom, 20)
             }
             .background(Color(hex: "232323"))
