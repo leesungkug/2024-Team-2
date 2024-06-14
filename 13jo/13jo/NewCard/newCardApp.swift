@@ -23,7 +23,7 @@ struct newCardApp: App {
     
     var body: some Scene {
         WindowGroup {
-            newCardView()
+            CardDetailView()
                 .modelContainer(modelContainer)
         }
     }
