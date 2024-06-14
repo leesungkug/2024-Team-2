@@ -12,6 +12,8 @@ class MotionManager: ObservableObject {
     private var motionManager: CMMotionManager
     @Published var isDeviceFlipped: Bool = false
     @Published var timeIntervalSince: TimeInterval = 0.0
+    @Published var isDeviceFlippedFor5Seconds: Bool = false
+
     private var flipStartTime: Date?
     private let flipDuration: TimeInterval = 5.0 // 5초
     
@@ -30,18 +32,21 @@ class MotionManager: ObservableObject {
     private func handleDeviceMotion(data: CMAccelerometerData) {
         let acceleration = data.acceleration
         DispatchQueue.main.async {
-            if acceleration.z > 0.9 {
+            if acceleration.z > 0.8 {
+                self.isDeviceFlipped = true
                 if self.flipStartTime == nil {
                     self.flipStartTime = Date()
                 } else if let startTime = self.flipStartTime {
                     self.timeIntervalSince = Date().timeIntervalSince(startTime)
                     if self.timeIntervalSince >= self.flipDuration{
-                        self.isDeviceFlipped = true
+                        self.isDeviceFlippedFor5Seconds = true
                     }
                 }
             } else {
                 self.flipStartTime = nil
                 self.isDeviceFlipped = false
+                self.isDeviceFlippedFor5Seconds = false
+                self.timeIntervalSince = 0.0
             }
         }
     }
