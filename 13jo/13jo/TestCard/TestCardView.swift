@@ -27,7 +27,7 @@ struct TestCardView: View {
                 
                 NavigationLink {
                     //TODO: shuffledCardList 넣어서 CardDetail연결
-                    CardDetail()
+                    CardDetailView(shuffledCardList: shuffledCardList)
                 } label: {
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color(hex: "53E7FB"))

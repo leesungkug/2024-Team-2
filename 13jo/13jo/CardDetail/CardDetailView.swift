@@ -6,17 +6,23 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct CardDetailView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.modelContext) var modelContext
+    @Query var newCards: [newCard]
     @StateObject private var motionManager = MotionManager()
     @State var quizModel: String = "나는 누굴까요?"
     @State private var showAlert = false
     @State var currentIndex = 0
-    var shuffledCardList: [newCard] = [newCard(question: "1", answer: "1a"), newCard(question: "2", answer: "2a"), newCard(question: "3", answer: "3a"), newCard(question: "4", answer: "4a")]
     @State var isLastQuiz = false
-
+    var shuffledCardList: [newCard] = [] {
+        didSet {
+            print(shuffledCardList)
+        }
+    }
+    
     var body: some View {
         VStack {
 
@@ -34,13 +40,12 @@ struct CardDetailView: View {
                         Spacer()
                         VStack{
                             Button(action: {
-                                print("뒤로가기")
-                                //                    self.presentationMode.wrappedValue.dismiss()
+                                self.presentationMode.wrappedValue.dismiss()
                             }, label: {
-                                Image("Close")
+                                Image(isLastQuiz ? "Activeclose" : "Close")
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 24, height: 24)
+                                    .frame(width: 35, height: 35)
                             })
                             Spacer()
                         }
@@ -102,6 +107,12 @@ struct CardDetailView: View {
         .padding()
         .background(.black)
         .navigationBarBackButtonHidden(true)
+        .onAppear(perform: {
+            print("디버거 \(shuffledCardList)")
+            if shuffledCardList.count == 1{
+                isLastQuiz = true
+            }
+        })
         
     }
     
@@ -135,10 +146,15 @@ struct CardDetailView: View {
                     .padding(20)
                 Spacer()
             }
-            Text("\(motionManager.isDeviceFlipped ? shuffledCardList[currentIndex].answer : shuffledCardList[currentIndex].question)")
-                .font(.system(size: 40))
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                .foregroundStyle(.black)
+            if shuffledCardList.count > currentIndex + 1 {
+                Text("\(motionManager.isDeviceFlipped ? shuffledCardList[currentIndex].answer : shuffledCardList[currentIndex].question)")
+                    .font(.system(size: 40))
+                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                    .foregroundStyle(.black)
+            } else {
+                Text("개수 \(shuffledCardList.count)")
+            }
+            
             Spacer()
             if motionManager.isDeviceFlippedFor5Seconds{
                 HStack{
@@ -151,22 +167,33 @@ struct CardDetailView: View {
                             .scaledToFit()
                             .frame(width: 24, height: 24)
                     }
-                    .alert(isPresented: $showAlert) {
-                        Alert(
-                            title: Text("퀴즈 삭제"),
-                            message: Text("현재 퀴즈를 삭제하시겠습니까?"),
-                            primaryButton: .destructive(Text("삭제"), action: {
-                                print("삭제 버튼 클릭됨")
-                            }),
-                            secondaryButton: .cancel(Text("취소"), action: {
-                                print("취소 버튼 클릭됨")
-                                self.showAlert = false
-                                
-                            })                        
-                        )
-                    }
                 }
                 .padding()
+            }
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text("퀴즈 삭제"),
+                message: Text("현재 퀴즈를 삭제하시겠습니까?"),
+                primaryButton: .destructive(Text("삭제"), action: {
+                    print("삭제 버튼 클릭됨")
+                    deleteCard()
+                    print("디버그2", shuffledCardList, "index", currentIndex)
+                }),
+                secondaryButton: .cancel(Text("취소"), action: {
+                    print("취소 버튼 클릭됨")
+                    self.showAlert = false
+                    
+                })
+            )
+        }
+    }
+    
+    private func deleteCard(){
+        for card in newCards{
+            if card.id == shuffledCardList[currentIndex].id{
+                modelContext.delete(card)
+                print("디버그", shuffledCardList , "index", currentIndex)
             }
         }
     }

@@ -53,7 +53,12 @@ struct TestMainView: View {
     }
     
     private func shuffledCardList() -> [newCard] {
-        newCards.shuffled()
+        var newShuffledCardList: [newCard] = []
+        newCards.forEach { card in
+            newShuffledCardList.append(card)
+        }
+        newShuffledCardList.shuffle()
+        return newShuffledCardList
     }
 }
 
