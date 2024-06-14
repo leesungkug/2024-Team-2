@@ -149,7 +149,11 @@ struct newCardView: View {
                         .foregroundColor(.black)
                         .cornerRadius(10)
                         .font(.system(size: 20))
-                } .padding(.vertical, 22)
+                } 
+                .padding(.vertical, 22)
+                .disabled(question.isEmpty)
+                .disabled(answer.isEmpty)
+                
                 Spacer()
                     .frame(height: 50)
                 
