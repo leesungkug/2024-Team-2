@@ -11,6 +11,9 @@ import CoreMotion
 class MotionManager: ObservableObject {
     private var motionManager: CMMotionManager
     @Published var isDeviceFlipped: Bool = false
+    @Published var timeIntervalSince: TimeInterval = 0.0
+    private var flipStartTime: Date?
+    private let flipDuration: TimeInterval = 5.0 // 5초
     
     init() {
         self.motionManager = CMMotionManager()
@@ -27,7 +30,19 @@ class MotionManager: ObservableObject {
     private func handleDeviceMotion(data: CMAccelerometerData) {
         let acceleration = data.acceleration
         DispatchQueue.main.async {
-            self.isDeviceFlipped = acceleration.z < -0.9
+            if acceleration.z > 0.9 {
+                if self.flipStartTime == nil {
+                    self.flipStartTime = Date()
+                } else if let startTime = self.flipStartTime {
+                    self.timeIntervalSince = Date().timeIntervalSince(startTime)
+                    if self.timeIntervalSince >= self.flipDuration{
+                        self.isDeviceFlipped = true
+                    }
+                }
+            } else {
+                self.flipStartTime = nil
+                self.isDeviceFlipped = false
+            }
         }
     }
 }
@@ -38,11 +53,11 @@ struct ContentView: View {
     var body: some View {
         VStack {
             if motionManager.isDeviceFlipped {
-                Text("Device is flipped upside down")
+                Text("Device has been flipped for 5 seconds")
                     .font(.largeTitle)
                     .foregroundColor(.red)
             } else {
-                Text("Device is not flipped")
+                Text("Device is not flipped or not long enough \(String(format:"%.1f", motionManager.timeIntervalSince))")
                     .font(.largeTitle)
                     .foregroundColor(.green)
             }
@@ -50,6 +65,7 @@ struct ContentView: View {
         .padding()
     }
 }
+
 
 
 
