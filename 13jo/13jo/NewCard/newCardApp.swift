@@ -7,7 +7,6 @@
 import SwiftUI
 import SwiftData
 
-@available(iOS 17, *)
 @main
 struct newCardApp: App {
     var modelContainer: ModelContainer = {

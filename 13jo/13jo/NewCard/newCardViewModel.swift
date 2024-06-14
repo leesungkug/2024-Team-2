@@ -8,12 +8,10 @@
 import Foundation
 import SwiftUI
 
-@available(iOS 17.0, *)
 struct MaxLengthModifier: ViewModifier {
     @Binding var text: String
     let maxLength: Int
 
-    @available(iOS 17.0, *)
     func body(content: Content) -> some View {
         if #available(iOS 17.0, *) {
             content
@@ -26,12 +24,10 @@ struct MaxLengthModifier: ViewModifier {
     }
 }
 
-@available(iOS 17.0, *)
-extension TextField {
+extension TextEditor {
     func maxLength(text: Binding<String>, _ maxLength: Int) -> some View {
         return ModifiedContent(content: self,
-                               modifier: MaxLengthModifier(text: text,
-                                                           maxLength: maxLength))
+                modifier: MaxLengthModifier(text: text,maxLength: maxLength))
     }
 }
 
