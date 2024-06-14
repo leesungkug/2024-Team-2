@@ -22,6 +22,7 @@
 		E7774F6A2C1CBD12008CC440 /* Color+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7774F692C1CBD12008CC440 /* Color+.swift */; };
 		E7774F6C2C1CC953008CC440 /* TestMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7774F6B2C1CC953008CC440 /* TestMainView.swift */; };
 		E7774F6E2C1CC9C2008CC440 /* EmptyTestCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7774F6D2C1CC9C2008CC440 /* EmptyTestCardView.swift */; };
+		E7774F702C1CE71E008CC440 /* TestInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7774F6F2C1CE71E008CC440 /* TestInformationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		E7774F692C1CBD12008CC440 /* Color+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+.swift"; sourceTree = "<group>"; };
 		E7774F6B2C1CC953008CC440 /* TestMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMainView.swift; sourceTree = "<group>"; };
 		E7774F6D2C1CC9C2008CC440 /* EmptyTestCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTestCardView.swift; sourceTree = "<group>"; };
+		E7774F6F2C1CE71E008CC440 /* TestInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestInformationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				E7774F6B2C1CC953008CC440 /* TestMainView.swift */,
 				E7774F662C1CB1BB008CC440 /* TestCardView.swift */,
 				E7774F6D2C1CC9C2008CC440 /* EmptyTestCardView.swift */,
+				E7774F6F2C1CE71E008CC440 /* TestInformationView.swift */,
 			);
 			path = TestCard;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EF68CCB2C1C893A00DC2823 /* ContentView.swift in Sources */,
+				E7774F702C1CE71E008CC440 /* TestInformationView.swift in Sources */,
 				E7774F6C2C1CC953008CC440 /* TestMainView.swift in Sources */,
 				E7774F6E2C1CC9C2008CC440 /* EmptyTestCardView.swift in Sources */,
 				E7774F6A2C1CBD12008CC440 /* Color+.swift in Sources */,

@@ -8,7 +8,7 @@ import SwiftUI
 import SwiftData
 
 @available(iOS 17, *)
-@main
+//@main
 struct newCardApp: App {
     var modelContainer: ModelContainer = {
         let schema = Schema([newCard.self])
