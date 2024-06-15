@@ -17,12 +17,10 @@ struct CardDetailView: View {
     @State private var showAlert = false
     @State var currentIndex = 0
     @State var isLastQuiz = false
-    var shuffledCardList: [newCard] = [] {
-        didSet {
-            print(shuffledCardList)
-        }
-    }
-    
+    @State var shuffledCardList: [newCard] = Array(repeating: newCard(question: "", answer: ""), count: 100)
+
+//    var shuffledCardList: [newCard] = [newCard(question: "", answer: "")]
+
     var body: some View {
         VStack {
 
@@ -60,12 +58,28 @@ struct CardDetailView: View {
             card
                 .padding(.bottom, 55)
                 .animation(.easeInOut, value: motionManager.isDeviceFlipped)
+//                .sheet(isPresented: $showAlert) {
+//                     DeleteConfirmationView(showSheet: $showAlert, deleteAction: deleteCard)
+//                 }
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text("퀴즈 삭제"),
+                        message: Text("현재 퀴즈를 삭제하시겠습니까?"),
+                        primaryButton: .destructive(Text("삭제"), action: {
+                            print("삭제 버튼 클릭됨")
+                            deleteCard()
+                            print("디버그2", shuffledCardList, "index", currentIndex)
+                        }),
+                        secondaryButton: .cancel(Text("취소"))
+                    )
+                }
             if !motionManager.isDeviceFlipped {
                 Button(action: {
                     if currentIndex < shuffledCardList.count - 1{
                         currentIndex += 1
-                    } else {
-                        isLastQuiz = true
+                        if currentIndex == shuffledCardList.count - 1{
+                            isLastQuiz = true
+                        }
                     }
                 }, label: {
                     HStack{
@@ -127,6 +141,7 @@ struct CardDetailView: View {
             Rectangle()
                 .foregroundStyle(motionManager.isDeviceFlipped ? Color("MainColor") : .white)
                 .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 20)))
+                .shadow(color: .black, radius: 10, x: 0, y: 5)
             if motionManager.isDeviceFlipped && !motionManager.isDeviceFlippedFor5Seconds{
                 ProgressRingView(progress: $motionManager.timeIntervalSince)
             } else {
@@ -138,23 +153,28 @@ struct CardDetailView: View {
     
     var quiz: some View {
         VStack{
-            HStack{
+            HStack(alignment: .top){
                 Text(motionManager.isDeviceFlipped ? "A" : "Q")
                     .font(.system(size: 50))
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .foregroundStyle(.black)
                     .padding(20)
                 Spacer()
-            }
-            if shuffledCardList.count > currentIndex + 1 {
-                Text("\(motionManager.isDeviceFlipped ? shuffledCardList[currentIndex].answer : shuffledCardList[currentIndex].question)")
-                    .font(.system(size: 40))
-                    .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                Text("\(currentIndex + 1)/\(shuffledCardList.count)개")
+                    .font(.system(size: 15))
+                    .fontWeight(.regular)
                     .foregroundStyle(.black)
-            } else {
-                Text("개수 \(shuffledCardList.count)")
+                    .padding()
             }
-            
+//            if shuffledCardList.count > currentIndex + 1 {
+//  
+//            } else {
+//                Text("개수 \(shuffledCardList.count)")
+//            }
+            Text("\(motionManager.isDeviceFlipped ? shuffledCardList[currentIndex].answer : shuffledCardList[currentIndex].question)")
+                .font(.system(size: 40))
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .foregroundStyle(.black)
             Spacer()
             if motionManager.isDeviceFlippedFor5Seconds{
                 HStack{
@@ -171,22 +191,7 @@ struct CardDetailView: View {
                 .padding()
             }
         }
-        .alert(isPresented: $showAlert) {
-            Alert(
-                title: Text("퀴즈 삭제"),
-                message: Text("현재 퀴즈를 삭제하시겠습니까?"),
-                primaryButton: .destructive(Text("삭제"), action: {
-                    print("삭제 버튼 클릭됨")
-                    deleteCard()
-                    print("디버그2", shuffledCardList, "index", currentIndex)
-                }),
-                secondaryButton: .cancel(Text("취소"), action: {
-                    print("취소 버튼 클릭됨")
-                    self.showAlert = false
-                    
-                })
-            )
-        }
+ 
     }
     
     private func deleteCard(){
@@ -220,6 +225,49 @@ struct ProgressRingView: View {
                 .foregroundColor(Color.white)
         }
         .padding(40)
+    }
+}
+
+struct DeleteConfirmationView: View {
+    @Binding var showSheet: Bool
+    var deleteAction: () -> Void
+    
+    var body: some View {
+        VStack {
+            Text("퀴즈 삭제")
+                .font(.headline)
+                .padding()
+            
+            Text("현재 퀴즈를 삭제하시겠습니까?")
+                .padding()
+            
+            HStack {
+                Button(action: {
+                    deleteAction()
+                    showSheet = false
+                }) {
+                    Text("삭제")
+                        .padding()
+                        .background(Color.red)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                
+                Spacer().frame(width: 20)
+                
+                Button(action: {
+                    showSheet = false
+                }) {
+                    Text("취소")
+                        .padding()
+                        .background(Color.gray)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+            }
+            .padding()
+        }
+        .padding()
     }
 }
 
