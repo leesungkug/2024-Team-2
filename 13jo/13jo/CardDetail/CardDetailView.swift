@@ -56,20 +56,17 @@ struct CardDetailView: View {
             card
                 .padding(.bottom, 55)
                 .animation(.easeInOut, value: motionManager.isDeviceFlipped)
-//                .sheet(isPresented: $showAlert) {
-//                     DeleteConfirmationView(showSheet: $showAlert, deleteAction: deleteCard)
-//                 }
                 .alert(isPresented: $showAlert) {
-                    Alert(
-                        title: Text("퀴즈 삭제"),
-                        message: Text("현재 퀴즈를 삭제하시겠습니까?"),
-                        primaryButton: .destructive(Text("삭제"), action: {
-                            print("삭제 버튼 클릭됨")
-                            deleteCard()
-                            print("디버그2", shuffledCardList, "index", currentIndex)
-                        }),
-                        secondaryButton: .cancel(Text("취소"))
-                    )
+                    Alert(title: Text("Title"), message: Text("This is a alert message"), dismissButton: .default(Text("Dismiss")))
+                }
+                .alert("현재 퀴즈를 삭제하시겠습니까?", isPresented: $showAlert) {
+                    Button("삭제", role: .destructive) {
+                        deleteCard()
+                    }
+                    Button("취소", role: .cancel) {
+                        showAlert = false
+                    }
+
                 }
             if !motionManager.isDeviceFlipped {
                 Button(action: {
@@ -216,49 +213,6 @@ struct ProgressRingView: View {
                 .foregroundColor(Color.white)
         }
         .padding(40)
-    }
-}
-
-struct DeleteConfirmationView: View {
-    @Binding var showSheet: Bool
-    var deleteAction: () -> Void
-    
-    var body: some View {
-        VStack {
-            Text("퀴즈 삭제")
-                .font(.headline)
-                .padding()
-            
-            Text("현재 퀴즈를 삭제하시겠습니까?")
-                .padding()
-            
-            HStack {
-                Button(action: {
-                    deleteAction()
-                    showSheet = false
-                }) {
-                    Text("삭제")
-                        .padding()
-                        .background(Color.red)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-                
-                Spacer().frame(width: 20)
-                
-                Button(action: {
-                    showSheet = false
-                }) {
-                    Text("취소")
-                        .padding()
-                        .background(Color.gray)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
-            }
-            .padding()
-        }
-        .padding()
     }
 }
 
