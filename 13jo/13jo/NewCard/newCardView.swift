@@ -13,6 +13,9 @@ struct newCardView: View {
     @Environment(\.modelContext) var modelContext 
     @State private var question = ""
     @State private var answer = ""
+    @Environment(\.dismiss) private var dismiss
+    
+    
     let limitCount = 100
     let buttonColor = Color(r: 83, g: 231, b: 251)
     let textfieldColor = Color(r: 35, g: 35, b: 35)
@@ -140,7 +143,7 @@ struct newCardView: View {
                 Button {
                     let newCard = newCard(question: question, answer: answer)
                     modelContext.insert(newCard)
-                    
+                    dismiss()
                 } label: {
                     Text("문제 추가하기")
                         .fontWeight(.semibold)
@@ -151,8 +154,9 @@ struct newCardView: View {
                         .font(.system(size: 20))
                 } 
                 .padding(.vertical, 22)
-                .disabled(question.isEmpty)
-                .disabled(answer.isEmpty)
+                .disabled(question.trimmingCharacters(in: .whitespaces).isEmpty)
+                .disabled(answer.trimmingCharacters(in: .whitespaces).isEmpty)
+                .navigationBarBackButtonHidden(true)
                 
                 Spacer()
                     .frame(height: 50)
