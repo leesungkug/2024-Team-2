@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TestCardView: View {
-    var shuffledCardList: [newCard] = []
+    var shuffledCardList: [NewCard] = []
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 13)
@@ -41,14 +41,14 @@ struct TestCardView: View {
                 }
                 
                 NavigationLink {
-                    newCardView()
+                    NewCardView()
                 } label: {
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color(hex: "000000"))
                         .frame(width: 282, height: 47)
                         .overlay(alignment: .center) {
                             HStack {
-                                Image("Add")
+                                Image("AddQuiz")
                                 Text("퀴즈 만들기")
                                     .font(.system(size: 20))
                                     .foregroundStyle(.white)

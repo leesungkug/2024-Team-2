@@ -31,7 +31,7 @@ struct EmptyTestCardView: View {
                     .padding(.bottom, 40)
                 
                 NavigationLink {
-                    newCardView()
+                    NewCardView()
                 } label: {
                     RoundedRectangle(cornerRadius: 12)
                         .fill(Color(hex: "53E7FB"))

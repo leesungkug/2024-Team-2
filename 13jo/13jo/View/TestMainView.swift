@@ -10,7 +10,7 @@ import SwiftData
 
 struct TestMainView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query var newCards: [newCard]
+    @Query var newCards: [NewCard]
     
     var body: some View {
         NavigationStack {
@@ -52,8 +52,8 @@ struct TestMainView: View {
         }
     }
     
-    private func shuffledCardList() -> [newCard] {
-        var newShuffledCardList: [newCard] = []
+    private func shuffledCardList() -> [NewCard] {
+        var newShuffledCardList: [NewCard] = []
         newCards.forEach { card in
             newShuffledCardList.append(card)
         }

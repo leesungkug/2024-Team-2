@@ -1,11 +1,10 @@
 //
-//  newCardViewModel.swift
+//  TextEditor+.swift
 //  13jo
 //
-//  Created by Shim Hyeonhee on 6/15/24.
+//  Created by sungkug_apple_developer_ac on 6/15/24.
 //
 
-import Foundation
 import SwiftUI
 
 struct MaxLengthModifier: ViewModifier {
@@ -30,11 +29,3 @@ extension TextEditor {
                 modifier: MaxLengthModifier(text: text,maxLength: maxLength))
     }
 }
-
-
-extension Color {
-    init(r: CGFloat, g: CGFloat, b: CGFloat) {
-        self.init(red: r/255, green: g/255, blue: b/255)
-    }
-}
-

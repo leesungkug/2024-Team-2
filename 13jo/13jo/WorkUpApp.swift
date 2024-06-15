@@ -9,9 +9,9 @@ import SwiftUI
 import SwiftData
 
 @main
-struct _3joApp: App {
+struct WorkUpApp: App {
     var modelContainer: ModelContainer = {
-        let schema = Schema([newCard.self])
+        let schema = Schema([NewCard.self])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
         
         do {

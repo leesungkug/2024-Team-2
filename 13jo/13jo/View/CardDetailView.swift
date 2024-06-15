@@ -11,13 +11,13 @@ import SwiftData
 struct CardDetailView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.modelContext) var modelContext
-    @Query var newCards: [newCard]
+    @Query var newCards: [NewCard]
     @StateObject private var motionManager = MotionManager()
     @State var quizModel: String = "나는 누굴까요?"
     @State private var showAlert = false
     @State var currentIndex = 0
     @State var isLastQuiz = false
-    @State var shuffledCardList: [newCard] = Array(repeating: newCard(question: "", answer: ""), count: 100)
+    @State var shuffledCardList: [NewCard] = Array(repeating: NewCard(question: "", answer: ""), count: 100)
 
     var body: some View {
         VStack {

@@ -9,7 +9,7 @@
 import SwiftUI
 import SwiftData
 
-struct newCardView: View {
+struct NewCardView: View {
     @Environment(\.modelContext) var modelContext 
     @State private var question = ""
     @State private var answer = ""
@@ -139,7 +139,7 @@ struct newCardView: View {
                 
                 
                 Button {
-                    let newCard = newCard(question: question, answer: answer)
+                    let newCard = NewCard(question: question, answer: answer)
                     modelContext.insert(newCard)
                     dismiss()
                 } label: {

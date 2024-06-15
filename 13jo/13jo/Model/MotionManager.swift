@@ -1,8 +1,8 @@
 //
-//  ContentView.swift
+//  MotionManager.swift
 //  13jo
 //
-//  Created by sungkug_apple_developer_ac on 6/14/24.
+//  Created by sungkug_apple_developer_ac on 6/15/24.
 //
 
 import SwiftUI
@@ -50,30 +50,4 @@ class MotionManager: ObservableObject {
             }
         }
     }
-}
-
-struct ContentView: View {
-    @StateObject private var motionManager = MotionManager()
-    
-    var body: some View {
-        VStack {
-            if motionManager.isDeviceFlipped {
-                Text("Device has been flipped for 5 seconds")
-                    .font(.largeTitle)
-                    .foregroundColor(.red)
-            } else {
-                Text("Device is not flipped or not long enough \(String(format:"%.1f", motionManager.timeIntervalSince))")
-                    .font(.largeTitle)
-                    .foregroundColor(.green)
-            }
-        }
-        .padding()
-    }
-}
-
-
-
-
-#Preview {
-    ContentView()
 }
