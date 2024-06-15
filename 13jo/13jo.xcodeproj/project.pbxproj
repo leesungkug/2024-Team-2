@@ -22,6 +22,7 @@
 		E7774F6C2C1CC953008CC440 /* TestMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7774F6B2C1CC953008CC440 /* TestMainView.swift */; };
 		E7774F6E2C1CC9C2008CC440 /* EmptyTestCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7774F6D2C1CC9C2008CC440 /* EmptyTestCardView.swift */; };
 		E7774F702C1CE71E008CC440 /* TestInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7774F6F2C1CE71E008CC440 /* TestInformationView.swift */; };
+		E7774F722C1D2CE8008CC440 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7774F712C1D2CE8008CC440 /* View+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		E7774F6B2C1CC953008CC440 /* TestMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestMainView.swift; sourceTree = "<group>"; };
 		E7774F6D2C1CC9C2008CC440 /* EmptyTestCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyTestCardView.swift; sourceTree = "<group>"; };
 		E7774F6F2C1CE71E008CC440 /* TestInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestInformationView.swift; sourceTree = "<group>"; };
+		E7774F712C1D2CE8008CC440 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				E7774F692C1CBD12008CC440 /* Color+.swift */,
+				E7774F712C1D2CE8008CC440 /* View+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 				E7774F702C1CE71E008CC440 /* TestInformationView.swift in Sources */,
 				E7774F6C2C1CC953008CC440 /* TestMainView.swift in Sources */,
 				E7774F6E2C1CC9C2008CC440 /* EmptyTestCardView.swift in Sources */,
+				E7774F722C1D2CE8008CC440 /* View+.swift in Sources */,
 				E7774F6A2C1CBD12008CC440 /* Color+.swift in Sources */,
 				1EF68CC92C1C893A00DC2823 /* _3joApp.swift in Sources */,
 				E7774F672C1CB1BB008CC440 /* TestCardView.swift in Sources */,
@@ -348,7 +352,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"13jo/Preview Content\"";
-				DEVELOPMENT_TEAM = AQCS8SYVV6;
+				DEVELOPMENT_TEAM = AFS6YUQ2Y4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -378,7 +382,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"13jo/Preview Content\"";
-				DEVELOPMENT_TEAM = AQCS8SYVV6;
+				DEVELOPMENT_TEAM = AFS6YUQ2Y4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

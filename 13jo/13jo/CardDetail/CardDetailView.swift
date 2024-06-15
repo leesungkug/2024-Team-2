@@ -19,8 +19,6 @@ struct CardDetailView: View {
     @State var isLastQuiz = false
     @State var shuffledCardList: [newCard] = Array(repeating: newCard(question: "", answer: ""), count: 100)
 
-//    var shuffledCardList: [newCard] = [newCard(question: "", answer: "")]
-
     var body: some View {
         VStack {
 
@@ -122,7 +120,6 @@ struct CardDetailView: View {
         .background(.black)
         .navigationBarBackButtonHidden(true)
         .onAppear(perform: {
-            print("디버거 \(shuffledCardList)")
             if shuffledCardList.count == 1{
                 isLastQuiz = true
             }
@@ -166,11 +163,6 @@ struct CardDetailView: View {
                     .foregroundStyle(.black)
                     .padding()
             }
-//            if shuffledCardList.count > currentIndex + 1 {
-//  
-//            } else {
-//                Text("개수 \(shuffledCardList.count)")
-//            }
             Text("\(motionManager.isDeviceFlipped ? shuffledCardList[currentIndex].answer : shuffledCardList[currentIndex].question)")
                 .font(.system(size: 40))
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -185,7 +177,7 @@ struct CardDetailView: View {
                         Image("Trash")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 24, height: 24)
+                            .frame(width: 36, height: 36)
                     }
                 }
                 .padding()
@@ -198,7 +190,6 @@ struct CardDetailView: View {
         for card in newCards{
             if card.id == shuffledCardList[currentIndex].id{
                 modelContext.delete(card)
-                print("디버그", shuffledCardList , "index", currentIndex)
             }
         }
     }
