@@ -1,17 +1,17 @@
 //
-//  newCardView.swift
+//  _3joApp.swift
 //  13jo
 //
-//  Created by Shim Hyeonhee on 6/15/24.
+//  Created by sungkug_apple_developer_ac on 6/14/24.
 //
+
 import SwiftUI
 import SwiftData
 
-@available(iOS 17, *)
 @main
-struct newCardApp: App {
+struct WorkUpApp: App {
     var modelContainer: ModelContainer = {
-        let schema = Schema([newCard.self])
+        let schema = Schema([NewCard.self])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
         
         do {
@@ -23,8 +23,9 @@ struct newCardApp: App {
     
     var body: some Scene {
         WindowGroup {
-            newCardView()
+            TestMainView()
                 .modelContainer(modelContainer)
         }
     }
 }
+

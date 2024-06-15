@@ -1,35 +1,82 @@
 //
-//  CardDetail.swift
+//  CardDetailView.swift
 //  13jo
 //
 //  Created by sungkug_apple_developer_ac on 6/15/24.
 //
 
 import SwiftUI
+import SwiftData
 
-struct CardDetail: View {
+struct CardDetailView: View {
+    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.modelContext) var modelContext
+    @Query var newCards: [NewCard]
     @StateObject private var motionManager = MotionManager()
     @State var quizModel: String = "나는 누굴까요?"
+    @State private var showAlert = false
+    @State var currentIndex = 0
+    @State var isLastQuiz = false
+    @State var shuffledCardList: [NewCard] = Array(repeating: NewCard(question: "", answer: ""), count: 100)
 
     var body: some View {
         VStack {
+
             Spacer()
             if !motionManager.isDeviceFlipped{
-                Image("화살표")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 106, height: 106)
-                    .padding(.bottom, 20)
-                Text("고개를 들어서 정답을 확인")
+                ZStack{
+                    Spacer()
+                    Image("arrow")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 106, height: 106)
+                        .padding(.bottom, 20)
+                    Spacer()
+                    HStack{
+                        Spacer()
+                        VStack{
+                            Button(action: {
+                                self.presentationMode.wrappedValue.dismiss()
+                            }, label: {
+                                Image(isLastQuiz ? "Activeclose" : "Close")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 35, height: 35)
+                            })
+                            Spacer()
+                        }
+                    }
+                }
+                Text(isLastQuiz ? "모든 퀴즈가 끝났습니다" : "고개를 들어서 정답을 확인")
                     .font(.system(size: 20, weight: .bold))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(isLastQuiz ? Color("MainColor") :.white)
                     .padding(.bottom, 20)
+                    
             }
             card
                 .padding(.bottom, 55)
                 .animation(.easeInOut, value: motionManager.isDeviceFlipped)
+                .alert(isPresented: $showAlert) {
+                    Alert(title: Text("Title"), message: Text("This is a alert message"), dismissButton: .default(Text("Dismiss")))
+                }
+                .alert("현재 퀴즈를 삭제하시겠습니까?", isPresented: $showAlert) {
+                    Button("삭제", role: .destructive) {
+                        deleteCard()
+                    }
+                    Button("취소", role: .cancel) {
+                        showAlert = false
+                    }
+
+                }
             if !motionManager.isDeviceFlipped {
-                Button(action: {}, label: {
+                Button(action: {
+                    if currentIndex < shuffledCardList.count - 1{
+                        currentIndex += 1
+                        if currentIndex == shuffledCardList.count - 1{
+                            isLastQuiz = true
+                        }
+                    }
+                }, label: {
                     HStack{
                         Spacer()
                         Text("다음")
@@ -38,10 +85,11 @@ struct CardDetail: View {
                         Spacer()
                     }
                     .frame(height: 64)
-                    .background(Color("MainColor"))
+                    .background(isLastQuiz ? Color("DisabledColor") : Color("MainColor"))
                     .clipShape(RoundedRectangle(cornerRadius: 12))
                     .padding(.bottom, 50)
                 })
+                .disabled(isLastQuiz)
             } else if !motionManager.isDeviceFlippedFor5Seconds{
                 VStack{
                     Text("정답 확인하기")
@@ -57,7 +105,7 @@ struct CardDetail: View {
                     Text("돌아가서 퀴즈를 확인")
                         .font(.system(size: 20, weight: .bold))
                         .padding(.bottom, 15)
-                    Image("화살표")
+                    Image("arrow")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 106, height: 106)
@@ -67,6 +115,13 @@ struct CardDetail: View {
         }
         .padding()
         .background(.black)
+        .navigationBarBackButtonHidden(true)
+        .onAppear(perform: {
+            if shuffledCardList.count == 1{
+                isLastQuiz = true
+            }
+        })
+        
     }
     
     var card: some View {
@@ -80,6 +135,7 @@ struct CardDetail: View {
             Rectangle()
                 .foregroundStyle(motionManager.isDeviceFlipped ? Color("MainColor") : .white)
                 .clipShape(RoundedRectangle(cornerSize: CGSize(width: 20, height: 20)))
+                .shadow(color: .black, radius: 10, x: 0, y: 5)
             if motionManager.isDeviceFlipped && !motionManager.isDeviceFlippedFor5Seconds{
                 ProgressRingView(progress: $motionManager.timeIntervalSince)
             } else {
@@ -91,15 +147,20 @@ struct CardDetail: View {
     
     var quiz: some View {
         VStack{
-            HStack{
+            HStack(alignment: .top){
                 Text(motionManager.isDeviceFlipped ? "A" : "Q")
                     .font(.system(size: 50))
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     .foregroundStyle(.black)
                     .padding(20)
                 Spacer()
+                Text("\(currentIndex + 1)/\(shuffledCardList.count)개")
+                    .font(.system(size: 15))
+                    .fontWeight(.regular)
+                    .foregroundStyle(.black)
+                    .padding()
             }
-            Text("\(motionManager.isDeviceFlipped ? "A" : quizModel)")
+            Text("\(motionManager.isDeviceFlipped ? shuffledCardList[currentIndex].answer : shuffledCardList[currentIndex].question)")
                 .font(.system(size: 40))
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .foregroundStyle(.black)
@@ -108,15 +169,24 @@ struct CardDetail: View {
                 HStack{
                     Spacer()
                     Button {
-                        
+                        self.showAlert = true
                     } label: {
                         Image("Trash")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 24, height: 24)
+                            .frame(width: 36, height: 36)
                     }
                 }
                 .padding()
+            }
+        }
+ 
+    }
+    
+    private func deleteCard(){
+        for card in newCards{
+            if card.id == shuffledCardList[currentIndex].id{
+                modelContext.delete(card)
             }
         }
     }
@@ -147,6 +217,6 @@ struct ProgressRingView: View {
 }
 
 #Preview {
-    CardDetail()
+    CardDetailView()
 }
 

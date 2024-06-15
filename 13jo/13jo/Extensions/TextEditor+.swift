@@ -1,19 +1,16 @@
 //
-//  newCardViewModel.swift
+//  TextEditor+.swift
 //  13jo
 //
-//  Created by Shim Hyeonhee on 6/15/24.
+//  Created by sungkug_apple_developer_ac on 6/15/24.
 //
 
-import Foundation
 import SwiftUI
 
-@available(iOS 17.0, *)
 struct MaxLengthModifier: ViewModifier {
     @Binding var text: String
     let maxLength: Int
 
-    @available(iOS 17.0, *)
     func body(content: Content) -> some View {
         if #available(iOS 17.0, *) {
             content
@@ -26,19 +23,9 @@ struct MaxLengthModifier: ViewModifier {
     }
 }
 
-@available(iOS 17.0, *)
-extension TextField {
+extension TextEditor {
     func maxLength(text: Binding<String>, _ maxLength: Int) -> some View {
         return ModifiedContent(content: self,
-                               modifier: MaxLengthModifier(text: text,
-                                                           maxLength: maxLength))
+                modifier: MaxLengthModifier(text: text,maxLength: maxLength))
     }
 }
-
-
-extension Color {
-    init(r: CGFloat, g: CGFloat, b: CGFloat) {
-        self.init(red: r/255, green: g/255, blue: b/255)
-    }
-}
-
