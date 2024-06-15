@@ -59,30 +59,29 @@ struct newCardView: View {
                             Text("\(question.count) / \(limitCount)자")
                                 .font(.system(size: 15))
                         }.padding(.leading, 10)
+                        
                         ZStack(alignment: .topLeading) {
-                                let placeholder: String = "질문을 입력하세요"
+                            let placeholder: String = "문제를 입력해 주세요"
                             
                             TextEditor(text: $question)
                                 .maxLength(text: $question, limitCount)
                                 .font(.system(size: 15))
                                 .scrollContentBackground(.hidden)
                                 .foregroundColor(.white)
-                                
                                 .padding(.leading, 10)
-                                .padding(.top, 7)
+                                .padding(.top, 11)
                                 .background(textfieldColor)
                                 .frame(width: 310, height: 148)
                                 .cornerRadius(10)
-                                .lineSpacing(/*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/)
-                                
+                                .lineSpacing(10.0)
+                            
                             if question.isEmpty {
                                 Text(placeholder)
                                     .font(.system(size: 15))
-                                    .foregroundStyle(placeholderColor)
-                                    .padding(.leading, 10)
-                                    .padding(.top, 7)
+                                    .foregroundColor(placeholderColor)
+                                    .padding(.leading, 15)
+                                    .padding(.top, 21)
                             }
-                        
                         }
                        
                     }
@@ -107,27 +106,26 @@ struct newCardView: View {
                         }
                         .padding(.leading, 10)
                         ZStack(alignment: .topLeading) {
-                            let placeholder: String = "정답을 입력하세요"
+                            let placeholder: String = "정답을 작성해 주세요"
                         
                         TextEditor(text: $answer)
                             .maxLength(text: $answer, limitCount)
-                            .foregroundColor(.white)
                             .font(.system(size: 15))
-                            .frame(width: 310, height: 148)
                             .scrollContentBackground(.hidden)
-                            
+                            .foregroundColor(.white)
                             .padding(.leading, 10)
-                            .padding(.top, 7)
+                            .padding(.top, 11)
                             .background(textfieldColor)
+                            .frame(width: 310, height: 148)
                             .cornerRadius(10)
-                            .lineSpacing(/*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/)
+                            .lineSpacing(10.0)
                             
                         if answer.isEmpty {
                             Text(placeholder)
                                 .font(.system(size: 15))
-                                .foregroundStyle(placeholderColor)
-                                .padding(.leading, 10)
-                                .padding(.top, 7)
+                                .foregroundColor(placeholderColor)
+                                .padding(.leading, 15)
+                                .padding(.top, 21)
                         }
                     }
                     }
@@ -157,10 +155,18 @@ struct newCardView: View {
                 .disabled(question.trimmingCharacters(in: .whitespaces).isEmpty)
                 .disabled(answer.trimmingCharacters(in: .whitespaces).isEmpty)
                 .navigationBarBackButtonHidden(true)
-                
+                .navigationBarItems(leading: Button(action: {
+                            dismiss()
+                        }) {
+                            Image(systemName: "chevron.left")
+                                .foregroundColor(.white) // Custom back button color
+                        })
                 Spacer()
                     .frame(height: 50)
                 
+            }
+            .onTapGesture {
+                hideKeyboard()
             }
         }
        
